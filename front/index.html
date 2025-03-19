@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
+      <title>Login Form</title>
+      <meta name="csrf-token" content="t9EtiRskFKx5XpnOFvbrimp5ZgsKIg3UU1Ea1iDM">
+      <link rel="shortcut icon" href="./assets/uploads/generals/favicon-665b8c8a863b91717275786.png">
+      <link href="./assets/frontend/shopva/app.css" rel="stylesheet">
+      <link rel="stylesheet" href="./assets/frontend/shopva/public.css">
+      <script charset="utf-8" src="./assets/frontend/shopva/jquery.min.js"></script>
+      <script charset="utf-8" src="./assets/frontend/shopva/dialog.min.js"></script>
+      <script charset="utf-8" src="./assets/frontend/shopva/common.js"></script>
+      <link rel="stylesheet" href="./assets/frontend/shopva/layer.css">
+      <script src="./assets/frontend/shopva/layer.js"></script>
+      <link rel="stylesheet" href="./assets/frontend/shopva/tye.css">
+
+      <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,600,700,900" rel="stylesheet">
+      <link rel="stylesheet" href="./assets/frontend/css/bootstrap.min.css" type="text/css" media="all"/>
+      <link rel="stylesheet" href="./assets/frontend/css/animate.min.css" type="text/css" media="all"/>
+      <link rel="stylesheet" href="./assets/frontend/css/owl.carousel.min.css" type="text/css" media="all"/>
+      <link rel="stylesheet" href="./assets/frontend/css/style.css" type="text/css" media="all"/>
+   </head>
+<body>
+
+<main class="main-content">
+    <div class="container">
+        <div class="login-item">
+            <div class="logo-item py-4">
+                <div class="d-flex justify-content-center text-center">
+                    <img src="./assets/uploads/generals/logo-665b8c82040901717275778.png" alt="logo" width="200px">
+                </div>
+            </div>
+               <div class="row">
+      <div class="col-md-4 mx-auto">
+         <div class="card">
+            <div class="card-body">
+               <div class="login-card-form">
+                  <h4 class="main-title py-4"> Login </h4>
+                  <form action="#" id="loginForm">
+                     <div class="form-group">
+                        <label class="mb-2">Enter Username</label>
+                        <input class="form-control" type="text" name="username" id="username">
+                     </div>
+                     <div class="form-group">
+                        <label class="mb-2">Enter Password</label>
+                        <input class="form-control" type="password" name="password" id="password">
+                     </div>
+                     <div class="form-group">
+                        <button class="btn btn-main btn-lg w-100" type="submit" id="login">Sign In</button>
+                     </div>
+                  </form>
+                  <div class="text-center my-4">
+                     <!-- <div class="mb-1"><a href="forgot-password.html" class="fw-bold text-primary">
+                     Forgot password?</a>
+                     </div> -->
+                     <div class="m-3"> 
+                        <a href="./forgetpassword.html" class="fw-bold text-primary ">Forget Password</a>
+                     </div>
+                     <div>
+                        Don't have an account? 
+                        <a href="./register.html" class="fw-bold text-primary">Register</a>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+        </div>
+    </div>
+</main>
+
+ <script> let baseurl = '127.0.0.1:5000/index.html'; </script>
+<!-- <script src="./assets/frontend/js/jquery.min.js"></script> -->
+<script src="./assets/frontend/js/bootstrap.bundle.min.js"></script>
+<script src="./assets/frontend/js/owl.carousel.min.js"></script>
+<script src="./assets/frontend/js/script.js"></script>
+<script src="./assets/frontend/js/pwa.js"></script>
+  <script>
+     $("#login").click(function(e) {
+        e.preventDefault();
+        $("#login").html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span><span class="sr-only"></span>');
+        $("#login").prop("disabled", true);
+        var username   = $("input[name=username]").val();
+        var password   = $("input[name=password]").val();
+        var csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+        $.ajax({
+            url: baseurl + '/login.html', // another post
+            type: "post",
+            headers: {
+                'X-CSRF-TOKEN': csrfToken
+            },
+            data: {
+                'username' : username, 
+                'password' : password
+            },
+            dataType: 'json',
+            beforeSend:function(){
+               loading = $(document).dialog({
+                  type : 'notice',
+                  infoIcon: baseurl + '/assets/frontend/loader/loading.gif',
+                  autoClose: 0
+               });
+            },
+            success:function(data){
+
+                if(data.success) {
+                    loading.close();
+                    $(document).dialog({
+                     infoText: data.message
+                  });
+                  setTimeout(function(){
+                     window.location.href = data.redirect_url;
+                  }, 500);
+
+                  //$("#login_form")[0].reset();
+                  $("#login").html('Sign In');
+                  $("#login").prop("disabled", false);
+                }
+                if(data.error) {
+                    loading.close();
+                   $(document).dialog({
+                        infoText: data.message
+                     });
+                }
+                $("#login").html('Sign In');
+                $("#login").prop("disabled", false);
+
+                /*else{
+                     $(document).dialog({
+                        infoText: "error",autoClose:2000
+                     });
+                  }*/
+            },
+            error:function (data) {
+               loading.close();
+            }
+         });
+      });
+
+      // Add to existing script section
+      document.getElementById('loginForm')?.addEventListener('submit', async (e) => {
+          e.preventDefault();
+          try {
+              const username = document.getElementById('username').value;
+              const password = document.getElementById('password').value;
+              await window.authService.login(username, password);
+          } catch (error) {
+              alert(error.message);
+          }
+      });
+  </script> 
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="assets/css/admin.css">
+</head>
+<body>
+    <div class="admin-container">
+        <header>
+            <h1>Admin Dashboard</h1>
+            <div class="user-info"></div>
+        </header>
+
+        <main>
+            <section id="clientManagement" class="panel">
+                <h2>Client Management</h2>
+                <div class="client-list">
+                    <select id="clientSelect">
+                        <option value="">Select Client</option>
+                    </select>
+                </div>
+                
+                <div class="client-details hidden">
+                    <div class="field-group">
+                        <label>Progress:</label>
+                        <input type="range" id="progressBar" min="0" max="100">
+                        <span id="progressValue">0%</span>
+                    </div>
+
+                    <div class="field-group">
+                        <label>Tier Membership:</label>
+                        <select id="tierSelect">
+                            <option value="basic">Basic</option>
+                            <option value="premium">Premium</option>
+                            <option value="vip">VIP</option>
+                        </select>
+                    </div>
+
+                    <div class="field-group">
+                        <label>Credit Score:</label>
+                        <input type="number" id="creditScore" min="0">
+                    </div>
+
+                    <div class="balances">
+                        <div class="field-group">
+                            <label>Total Balance:</label>
+                            <input type="number" id="totalBalance" step="0.01">
+                        </div>
+                        <div class="field-group">
+                            <label>Daily Balance:</label>
+                            <input type="number" id="dailyBalance" step="0.01">
+                        </div>
+                        <div class="field-group">
+                            <label>Frozen Balance:</label>
+                            <input type="number" id="frozenBalance" step="0.01">
+                        </div>
+                    </div>
+
+                    <button id="updateClient">Update Client</button>
+                </div>
+            </section>
+
+            <section id="productAssignment" class="panel">
+                <h2>Product Assignment</h2>
+                <div class="assignment-controls">
+                    <select id="assignmentClient">
+                        <option value="">Select Client</option>
+                    </select>
+                    <select id="setNumber">
+                        <option value="1">Set 1</option>
+                        <option value="2">Set 2</option>
+                    </select>
+                    <button id="assignProducts">Assign Products</button>
+                </div>
+                <div class="product-grid"></div>
+            </section>
+
+            <section id="transactions" class="panel">
+                <h2>Transaction Messages</h2>
+                <div class="transaction-list">
+                    <div class="filters">
+                        <select id="messageType">
+                            <option value="all">All</option>
+                            <option value="deposit">Deposits</option>
+                            <option value="withdraw">Withdrawals</option>
+                        </select>
+                    </div>
+                    <div class="message-list"></div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="assets/js/admin.js"></script>
+
+    <!-- Add at the end of admin/index.html, before the closing body tag -->
+    
+    <script src="src/services/authService.js"></script>
+    <script src="assets/js/auth-check.js"></script>
+
+</body>
+</html>

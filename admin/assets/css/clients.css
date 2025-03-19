@@ -1,0 +1,47 @@
+.clients-management {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    padding: 1.5rem;
+}
+
+.section-header {
+    border-bottom: 2px solid #eee;
+    padding-bottom: 1rem;
+    margin-bottom: 2rem;
+}
+
+.table-responsive {
+    margin-top: 1rem;
+}
+
+.table th {
+    background: #f8f9fa;
+    border-bottom: 2px solid #dee2e6;
+}
+
+.membership-badge {
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: 500;
+}
+
+.membership-bronze {
+    background: #cd7f32;
+    color: white;
+}
+
+.membership-silver {
+    background: #C0C0C0;
+    color: white;
+}
+
+.membership-gold {
+    background: #FFD700;
+    color: black;
+}
+
+.membership-platinum {
+    background: #E5E4E2;
+    color: black;
+}
