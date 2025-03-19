@@ -396,7 +396,7 @@
     </style>
 </head>
 <body>
-    <a href="#" class="back-link">
+    <a href="./index.html" class="back-link">
         ← GO TO HOMEPAGE
     </a>
 
@@ -697,12 +697,12 @@
                         // Store username in session storage for login page
                         sessionStorage.setItem('registered_username', formData.username);
                         
-                        // Show success message
-                        alert('Registration successful! You will be redirected to login.');
+                        // Show success message with account information
+                        alert('Registration successful! Your account has been created with a $15 welcome bonus and a $500 training account. You will be redirected to login.');
                         
                         // Redirect to login page
                         setTimeout(() => {
-                            window.location.href = './login.html';
+                            window.location.href = './index.html';  // Changed from login.html
                         }, 1500);
                     } else {
                         // Show error message
